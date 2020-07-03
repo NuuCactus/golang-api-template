@@ -5,26 +5,25 @@ import (
 	"github.com/nuucactus/golang-api-template/endpoints/health"
 
 	"github.com/charmixer/oas/api"
-	"github.com/charmixer/oas/exporter"
 
 	"github.com/gorilla/mux"
 )
 
-var oas api.Api
-
-func init() {
+func NewOas() (oas api.Api){
 	oas = api.Api{}
 
 	oas.Title = "Golang api template"
 	oas.Description = `Gives a simple blueprint for creating new api's`
 	oas.Version = "0.0.0"
-	oas.NewPath("GET", "/health", health.GetHealth, health.GetHealthSpec())
 
-	exporter.ToOasModel(oas)
+	oas.NewPath("GET", "/health", health.GetHealth, health.GetHealthSpec())
+	oas.NewPath("POST", "/health", health.PostHealth, health.PostHealthSpec())
+
+	return oas
 }
 
 
-func NewRouter() (r *mux.Router) {
+func NewRouter(oas api.Api) (r *mux.Router) {
 	r = mux.NewRouter()
 
 	for _,p := range oas.GetPaths() {

@@ -64,7 +64,8 @@ func RunServe() func(cmd *cobra.Command, args []string) {
 
 		addr := fmt.Sprintf("%s:%d", ip, port)
 
-		route := router.NewRouter()
+		oas := router.NewOas()
+		route := router.NewRouter(oas)
 
 		chain := alice.New(middleware.Context, middleware.Logging)
 
