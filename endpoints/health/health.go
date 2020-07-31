@@ -13,15 +13,30 @@ type Bla struct {
 }
 
 type GetHealthRequest struct {
+	Alive bool `header:"alive" json:"alive_json" xml:"alive_xml" oas:"Tells if bla"`
+	Ready bool `json:"ready_json" xml:"ready_xml"`
+	Test struct{
+		Bla1 Bla
+		Bla2 []Bla
+		Bla3 [][]Bla
+		Bla4 [][][]Bla
+		String1 []string
+		String2 [][]string
+		String3 [][][]string
+		MapBla map[string]Bla
+		MapString map[string]string
+		MapInt map[int]int
+	}
 
 }
 type GetHealthResponse []struct {
 	Alive bool `json:"alive_json" xml:"alive_xml" oas:"desc:Tells if bla"`
 	Ready bool `json:"ready_json" xml:"ready_xml"`
 	Test struct{
-		Bla1 []Bla
-		Bla2 [][]Bla
-		Bla3 [][][]Bla
+		Bla1 Bla
+		Bla2 []Bla
+		Bla3 [][]Bla
+		Bla4 [][][]Bla
 		String1 []string
 		String2 [][]string
 		String3 [][][]string
@@ -32,12 +47,13 @@ type GetHealthResponse []struct {
 }
 
 type PostHealthRequest []struct {
-	Alive bool `json:"alive_json" xml:"alive_xml" oas:"desc:Tells if bla"`
+	Alive bool `query:"alive" json:"alive_json" xml:"alive_xml" oas:"Tells if bla"`
 	Ready bool `json:"ready_json" xml:"ready_xml"`
 	Test struct{
-		Bla1 []Bla
-		Bla2 [][]Bla
-		Bla3 [][][]Bla
+		Bla1 Bla
+		Bla2 []Bla
+		Bla3 [][]Bla
+		Bla4 [][][]Bla
 		String1 []string
 		String2 [][]string
 		String3 [][][]string
@@ -47,12 +63,13 @@ type PostHealthRequest []struct {
 	}
 }
 type PostHealthResponse []struct {
-	Alive bool `json:"alive_json" xml:"alive_xml" oas:"desc:Tells if bla"`
+	Alive bool `json:"alive_json" xml:"alive_xml" desc:"Tells if bla"`
 	Ready bool `json:"ready_json" xml:"ready_xml"`
 	Test struct{
-		Bla1 []Bla
-		Bla2 [][]Bla
-		Bla3 [][][]Bla
+		Bla1 Bla
+		Bla2 []Bla
+		Bla3 [][]Bla
+		Bla4 [][][]Bla
 		String1 []string
 		String2 [][]string
 		String3 [][][]string
@@ -69,6 +86,7 @@ func GetHealthSpec() (api.Path) {
 
 		Request: api.Request{
 			Description: `Testing Request`,
+			Params: GetHealthRequest{},
 			//Schema: GetHealthRequest{},
 		},
 

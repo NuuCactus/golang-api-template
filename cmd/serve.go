@@ -23,6 +23,7 @@ func init() {
 
 	serveCmd.Flags().IntP("port", "p", 8080, "The port used for serving the api.")
 	serveCmd.Flags().StringP("ip", "i", "0.0.0.0", "The ip used for serving the api.")
+	serveCmd.Flags().StringP("domain", "d", "localhost", "The domain used to access the api.")
 
 	serveCmd.Flags().IntP("write-timeout", "", 10, "Timeout in seconds when writing response.")
 	serveCmd.Flags().IntP("read-timeout", "", 10, "Timeout in seconds when reading request headers and body.")
